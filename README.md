@@ -2,7 +2,7 @@
 
 This project is a fork from [Work at olist](https://github.com/olist/work-at-olist/) project by Olist. It's an application for a library to store book and authors data.
 
-Web app on Heroku: [api.olistlibrary.com](heroku.com)
+[Click here](https://afternoon-wave-72210.herokuapp.com/) to open a demo of the app on Heroku.
 
 ## 1. Versions
 
