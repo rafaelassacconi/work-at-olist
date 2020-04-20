@@ -32,4 +32,5 @@ class Book(models.Model):
 
     @property
     def authors_name(self):
+        """ Returns a string with the authors' names separated by comma """
         return ', '.join(self.authors.values_list('name', flat=True))
