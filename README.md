@@ -38,7 +38,8 @@ Author endpoints, more information [here](https://afternoon-wave-72210.herokuapp
 | `GET` | /v1/authors/{id}/ | Retrieves an author details |
 | `PUT` | /v1/authors/{id}/ | Updates an author |
 | `DELETE` | /v1/authors/{id}/ | Deletes an author |
-\
+
+
 Book endpoints, more information [here](https://afternoon-wave-72210.herokuapp.com/v1/docs/#books).
 
 | Method | Endpoint | Description |
