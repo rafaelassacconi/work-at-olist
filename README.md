@@ -8,7 +8,7 @@ This project is a fork from [Work at olist](https://github.com/olist/work-at-oli
 
 - Python 3.6.10
 - Django 3.0.5
-- Django Rest Framework
+- Django Rest Framework 3.11.0
 
 
 ## 2. Documentations
