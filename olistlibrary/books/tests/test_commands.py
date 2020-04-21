@@ -1,4 +1,5 @@
 import os
+from datetime import datetime, timedelta
 from django.test import TestCase
 from django.core.management import call_command
 from django.core.management.base import CommandError
@@ -29,10 +30,12 @@ class ImportAuthorsCommandTest(TestCase):
 
     def test_huge_file(self):
         """ Call command with a expected huge file """
-        pass
-        # TODO: test with huge file
-        #call_command(self.command, self.file_huge)
-        #self.assertEqual(Author.objects.count(), 1000000)
+        time_reference = timedelta(0, 60) # 1 min
+        time_start = datetime.now()
+        call_command(self.command, self.file_huge)
+        time_end = datetime.now() - time_start
+        self.assertEqual(Author.objects.count(), 2000000)
+        self.assertLess(time_end, time_reference)
 
     def test_file_with_wrong_column_name(self):
         """ Call command with file but wrong name of column """

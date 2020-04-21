@@ -52,7 +52,7 @@ Book endpoints, more information [here](https://afternoon-wave-72210.herokuapp.c
 
 ## 5. Running the project
 
-### 5.2 Virtualenv
+### 5.1 Virtualenv
 
 Install pip, virtualenv and virtualenvwrapper packages:
 ```
