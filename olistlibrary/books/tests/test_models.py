@@ -27,7 +27,6 @@ class BookModelTest(TestCase):
         name = 'Terminal'
         edition = 1
         year = 1992
-        authors = []
 
         book = Book.objects.create(
             name = name,
@@ -69,3 +68,16 @@ class BookModelTest(TestCase):
             edition=1, 
             publication_year=None
         )
+
+    def test_book_property_authors_name(self):
+        """ Test if publication_year field is required """
+        book = Book.objects.create(
+            name = 'Terminal',
+            edition = 1,
+            publication_year = 1992,
+        )
+
+        book.authors.add(Author.objects.create(name='Robin Cook'))
+        book.authors.add(Author.objects.create(name='Ivan Gregory'))
+
+        self.assertEqual(book.authors_name, 'Ivan Gregory, Robin Cook')

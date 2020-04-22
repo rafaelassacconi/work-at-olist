@@ -42,6 +42,9 @@ class Command(BaseCommand):
             )
             
             # Set random authors per book
+            if not total_authors:
+                continue
+
             for n in range(randint(1, 2)):
                 book.authors.add(randint(1, total_authors))
 

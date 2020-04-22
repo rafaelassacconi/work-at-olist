@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from django.test import TestCase
 from django.core.management import call_command
 from django.core.management.base import CommandError
-from books.models import Author
+from books.models import Author, Book
 
 
 class ImportAuthorsCommandTest(TestCase):
@@ -42,6 +42,44 @@ class ImportAuthorsCommandTest(TestCase):
         with self.assertRaises(CommandError) as out:
             call_command(self.command, self.file_simple, column_name="foo")
         self.assertIn('Usecols do not match columns', str(out.exception))
+
+    def test_file_not_found(self):
+        """ Call command with file path that doesn't exists """
+        with self.assertRaises(CommandError) as out:
+            call_command(self.command, 'noexists.csv')
+        self.assertIn('File not found', str(out.exception))
+
+    def test_no_arguments(self):
+        """ Call command with no arguments """
+        with self.assertRaises(CommandError) as out:
+            call_command(self.command)
+        self.assertIn('the following arguments are required', str(out.exception))
+
+
+class ImportBooksCommandTest(TestCase):
+    """ Tests for import_books command """
+
+    def setUp(self):
+        self.command = "import_books"
+        folder = "%s/test_files/" % os.path.dirname(os.path.realpath(__file__))
+        self.file_simple = folder + "books_simple.csv"
+
+        # Create authors
+        Author.objects.create(name='Robin Cook')
+        Author.objects.create(name='Sidney Sheldon')
+        Author.objects.create(name='Dan Brown')
+
+    def test_expected_simple_file(self):
+        """ Call command with expected simple file """
+        call_command(self.command, self.file_simple)
+        self.assertEqual(Book.objects.count(), 5)
+
+    def test_expected_simple_file_with_no_authors_in_base(self):
+        """ Call command with expected simple file with no authors in database """
+        Author.objects.all().delete()
+        call_command(self.command, self.file_simple)
+        self.assertEqual(Author.objects.count(), 0)
+        self.assertEqual(Book.objects.count(), 5)
 
     def test_file_not_found(self):
         """ Call command with file path that doesn't exists """
