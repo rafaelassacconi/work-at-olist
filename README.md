@@ -90,9 +90,10 @@ Run migrate command to create a database:
 ```
 olistlibrary/manage.py migrate
 ```
-Run the command bellow to import authors data:
+Run the command bellow to import authors and books data:
 ```
 olistlibrary/manage.py import_authors files/authors.csv
+olistlibrary/manage.py import_books files/books.csv
 ```
 ### 5.3 Run the local application
 Use the command bellow to execute the application:
